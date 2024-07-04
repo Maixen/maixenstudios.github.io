@@ -39,67 +39,79 @@
     <script type="module">
       // Import the functions you need from the SDKs you need
       import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-app.js";
-      import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-auth.js";
-      
-      // Your web app's Firebase configuration
-      const firebaseConfig = {
-        apiKey: "AIzaSyDEcAzKB239jv30vUwHK3EgeWOmzh1mUFE",
-        authDomain: "applaunchermaixenstudios.firebaseapp.com",
-        projectId: "applaunchermaixenstudios",
-        storageBucket: "applaunchermaixenstudios.appspot.com",
-        messagingSenderId: "673699589615",
-        appId: "1:673699589615:web:f1d93a30398b53531c5a1a"
-      };
+    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-auth.js";
     
-      // Initialize Firebase
-      const app = initializeApp(firebaseConfig);
-      const auth = getAuth(app);
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyDEcAzKB239jv30vUwHK3EgeWOmzh1mUFE",
+      authDomain: "applaunchermaixenstudios.firebaseapp.com",
+      projectId: "applaunchermaixenstudios",
+      storageBucket: "applaunchermaixenstudios.appspot.com",
+      messagingSenderId: "673699589615",
+      appId: "1:673699589615:web:f1d93a30398b53531c5a1a"
+    };
   
-      // Sign-up form submission handler
-      const signupForm = document.getElementById('signup-form');
-      signupForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        
-        const email = document.getElementById('signup-email').value;
-        const password = document.getElementById('signup-password').value;
-  
-        createUserWithEmailAndPassword(auth, email, password)
-          .then((userCredential) => {
-            // Signed up successfully
-            const user = userCredential.user;
-            console.log('User created:', user);
-            // You can redirect to another page or show a success message
-          })
-          .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            console.error('Error:', errorCode, errorMessage);
-            // Handle errors here, such as displaying error messages
-          });
-      });
-  
-      // Sign-in form submission handler
-      const loginForm = document.getElementById('login-form');
-      loginForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        
-        const email = document.getElementById('login-email').value;
-        const password = document.getElementById('login-password').value;
-  
-        signInWithEmailAndPassword(auth, email, password)
-          .then((userCredential) => {
-            // Signed in successfully
-            const user = userCredential.user;
-            console.log('User signed in:', user);
-            // You can redirect to another page or show a success message
-          })
-          .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            console.error('Error:', errorCode, errorMessage);
-            // Handle errors here, such as displaying error messages
-          });
-      });
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    // Function to show popup
+    function showPopup(message) {
+      const popup = document.getElementById('popup');
+      popup.textContent = message;
+      popup.className = "popup show";
+      setTimeout(() => { popup.className = popup.className.replace("show", ""); }, 3000);
+    }
+
+    // Sign-up form submission handler
+    const signupForm = document.getElementById('signup-form');
+    signupForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const email = document.getElementById('signup-email').value;
+      const password = document.getElementById('signup-password').value;
+
+      createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          // Signed up successfully
+          const user = userCredential.user;
+          console.log('User created:', user);
+          showPopup('User created successfully!');
+          // You can redirect to another page or show a success message
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          console.error('Error:', errorCode, errorMessage);
+          showPopup(`Error: ${errorMessage}`);
+          // Handle errors here, such as displaying error messages
+        });
+    });
+
+    // Sign-in form submission handler
+    const loginForm = document.getElementById('login-form');
+    loginForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const email = document.getElementById('login-email').value;
+      const password = document.getElementById('login-password').value;
+
+      signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          // Signed in successfully
+          const user = userCredential.user;
+          console.log('User signed in:', user);
+          showPopup('User signed in successfully!');
+          // You can redirect to another page or show a success message
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          console.error('Error:', errorCode, errorMessage);
+          showPopup(`Error: ${errorMessage}`);
+          // Handle errors here, such as displaying error messages
+        });
+    });
     </script>
         <footer>
             <p>&copy; 2024 MaixenStudios. All rights reserved.</p>
