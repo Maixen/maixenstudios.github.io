@@ -71,7 +71,6 @@ h1, h2, h3, h4, h5, h6 {
     transition: transform 1s ease-in-out;
     margin: 0;
     padding: 0;
-    /*border: 1px solid red; Temporary border for debugging */
 }
 
 
