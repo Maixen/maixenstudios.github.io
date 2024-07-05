@@ -73,6 +73,7 @@ h1, h2, h3, h4, h5, h6 {
     border: 2px solid #ffffff; /* Sets a 2px solid black border */
     border-radius: 15px; /* Rounds the corners with a 15px radius */
     padding: 10px;
+    display: inline-block;
 }
 
 
